@@ -34,54 +34,54 @@ public class AnalysisActuatorAspect
 	@Before(value = "pointcut(analysisActuator)") 
 	public void doBefore1(JoinPoint joinPoint, AnalysisActuator analysisActuator)throws Exception
 	{
-		log.info("Before1 {}", analysisActuator.note()); 
+		log.info("2.Before1 {}", analysisActuator.note()); 
 	}
 
 	@Before(value = "pointcut(analysisActuator)") 
 	public void doBefore2(AnalysisActuator analysisActuator)throws Exception
 	{
-		log.info("Before2 {}", analysisActuator.note()); 
+		log.info("3.Before2 {}", analysisActuator.note()); 
 	}
 
 	//After
 	@After(value = "pointcut(analysisActuator)") 
 	public void doAfter1(JoinPoint joinPoint, AnalysisActuator analysisActuator)throws Exception
 	{ 
-		log.info("After1 {}", analysisActuator.note());
+		log.info("6.After1 {}", analysisActuator.note());
 	}
 
 	@After(value = "pointcut(analysisActuator)") 
 	public void doAfter2(AnalysisActuator analysisActuator)throws Exception
 	{ 
-		log.info("After2 {}", analysisActuator.note());
+		log.info("7.After2 {}", analysisActuator.note());
 	}
 
 	//AfterReturning
     @AfterReturning(returning = "ret", value = "pointcut(analysisActuator)")
     public void doAfterReturning1(JoinPoint joinPoint, Object ret, AnalysisActuator analysisActuator) throws Exception 
     {
-    	log.info("AfterReturning1 {} {}", ret, analysisActuator.note());
+    	log.info("8.AfterReturning1 {} {}", ret, analysisActuator.note());
     }
    
     @AfterReturning(returning = "ret", value = "pointcut(analysisActuator)")
     public void doAfterReturning2(Object ret, AnalysisActuator analysisActuator) throws Exception 
     {
-    	log.info("AfterReturning {} {}", ret, analysisActuator.note());
+    	log.info("9.AfterReturning2 {} {}", ret, analysisActuator.note());
     }
  
     @AfterReturning(value = "pointcut(analysisActuator)")
     public void doAfterReturning3(AnalysisActuator analysisActuator) throws Exception 
     {
-    	log.info("AfterReturning3 {}", analysisActuator.note());
+    	log.info("10.AfterReturning3 {}", analysisActuator.note());
     }
 
     //Around
     @Around(value = "pointcut(analysisActuator)")  
     public Object doArround1(ProceedingJoinPoint pjp, AnalysisActuator analysisActuator) throws Throwable 
     { 
-    	log.info("Arround1 before proceed {}", analysisActuator.note());
+    	log.info("1.Arround1 before proceed {}", analysisActuator.note());
     	Object o =  pjp.proceed();
-    	log.info("Arround1 after proceed {}", analysisActuator.note());
+    	log.info("5.Arround1 after proceed {}", analysisActuator.note());
     	return o;
     }
  
@@ -107,26 +107,20 @@ public class AnalysisActuatorAspect
  /*
     //1)execution：用于匹配子表达式。
     //匹配com.example.demo包及其子包中所有类中的所有方法，返回类型任意，方法参数任意
-    @Pointcut("execution(* com.example.demo..*.*(..))")
+    @Pointcut("execution(* com.example.demo.IHelloWorldServiceImpl.*.*(..))")
     public void execution()
-    {
-		log.info("execution");
-    }
+    {}
 
     //2）within：用于匹配连接点所在的Java类或者包。
     //匹配类中的所有方法
     @Pointcut("within(com.example.demo)")
     public void within1()
-    {
-		log.info("within1");
-    }
+    {}
 
     //匹配包及其子包中所有类中的所有方法
     @Pointcut("within(com.example..*)")
     public void within2()
-    {
-		log.info("within2");    	
-    }
+    {}
 
     //3） this：用于向通知方法中传入代理对象的引用。
     @Before("before() && this(object)")
@@ -153,19 +147,15 @@ public class AnalysisActuatorAspect
     //所有被@AdviceAnnotation标注的类都将匹配
     @Pointcut("@within(com.example.demo.AnalysisActuator)")
     public void within3()
-    {
-		log.info("@within");     	
-    }
+    {}
 
     //7）@target ：和@within的功能类似，但必须要指定注解接口的保留策略为RUNTIME。
     @Pointcut("@target(com.example.demo.AnalysisActuator)")
     public void target2()
-    {
-		log.info("@target");   	
-    }
+    {}
 
     //8）@args ：传入连接点的对象对应的Java类必须被@args指定的Annotation注解标注。
-    @Before("@args(com.example.demo.AnalysisActuator)")
+    @Before("@args(AnalysisActuator)")
     public void args()
     {
 		log.info("@args");    	
@@ -175,15 +165,11 @@ public class AnalysisActuatorAspect
     //所有被指定注解标注的方法都将匹配。
     @Pointcut("@annotation(com.example.demo.AnalysisActuator)")
     public void before5()
-    {
-		log.info("@annotation");     	
-    }
+    {}
   
     //10）bean：通过受管Bean的名字来限定连接点所在的Bean。该关键词是Spring2.5新增的。
     @Pointcut("bean(person)")
     public void bean()
-    {
-		log.info("bean");       	
-    }
+    {}
  */
 }

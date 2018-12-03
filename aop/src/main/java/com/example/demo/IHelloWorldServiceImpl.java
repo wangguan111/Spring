@@ -14,7 +14,7 @@ public class IHelloWorldServiceImpl implements IHelloWorldService
 	@AnalysisActuator(note = "get message:")
 	 public String getHelloMessage(String name)
 	{
-		log.info("IHelloWorldServiceImpl {}", name); 
+		log.info("4.IHelloWorldServiceImpl {}", name); 
 		return "Hello " + Optional.ofNullable(name).orElse("World!");
     }
 }
