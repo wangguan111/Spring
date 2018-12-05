@@ -16,4 +16,10 @@ public class HelloWorldController
 	{
 		return helloWorldService.getHelloMessage(name);
 	}
+
+	@RequestMapping(value = "/hi", method = RequestMethod.GET)
+	public String hi(String name)
+	{
+		return helloWorldService.getHiMessage(name);
+	}
 }

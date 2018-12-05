@@ -7,7 +7,7 @@ import java.lang.annotation.RetentionPolicy;
 
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface AnalysisActuator 
+public @interface AopInterface 
 {
 	String note() default "";
 }

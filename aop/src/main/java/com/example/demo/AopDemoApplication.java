@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 //http://localhost:8081/hello?name=java
+//http://localhost:8081/hi?name=java
 
 @SpringBootApplication
 public class AopDemoApplication 
@@ -13,3 +14,20 @@ public class AopDemoApplication
 		SpringApplication.run(AopDemoApplication.class, args);
 	}
 }
+
+//1.within()
+//AopWithin
+
+//2.匹配对象（this, target, bean)
+//AopThis
+//AopTarget
+//AopBean
+
+//3.参数匹配(execution, arg)
+//AopExecution
+//AopArg
+
+//4.匹配注解(@annotation, @within, @target, @args)
+//AopAnnotationt
+//AopAnnotationt2
+//AopWithinMark -- no ok
