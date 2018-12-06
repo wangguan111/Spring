@@ -2,6 +2,7 @@ package com.example.demo;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
@@ -39,6 +40,36 @@ public class AopExecution
 	public void doBefore1(JoinPoint joinPoint)throws Exception
 	{
 		log.info("2.AopExecution Before1 {}", joinPoint); 
+
+		//获取目标方法的参数信息 
+		//java
+	    Object[] obj = joinPoint.getArgs();
+		log.info("2.AopExecution joinPoint.getArgs() {}", joinPoint.getArgs());
+
+	    //AOP代理类的信息
+		//com.example.demo.IHelloWorldServiceImpl@73032858
+		log.info("2.AopExecution joinPoint.getThis() {}", joinPoint.getThis());
+
+	    //代理的目标对象
+		//com.example.demo.IHelloWorldServiceImpl@73032858
+		log.info("2.AopExecution joinPoint.getTarget() {}", joinPoint.getTarget());
+
+	    //用的最多 通知的签名
+		//String com.example.demo.IHelloWorldServiceImpl.getHiMessage(String)
+	    Signature signature = joinPoint.getSignature();
+		log.info("2.AopExecution joinPoint.getSignature() {}", joinPoint.getSignature());
+		
+	    //代理的是哪一个方法
+		//getHiMessage
+		log.info("2.AopExecution signature.getSignature() {}", signature.getName());
+
+	    //AOP代理类的名字
+		//com.example.demo.IHelloWorldServiceImpl
+		log.info("2.AopExecution signature.getDeclaringTypeName() {}", signature.getDeclaringTypeName());
+
+	    //AOP代理类的类（class）信息
+		//class com.example.demo.IHelloWorldServiceImpl
+		log.info("2.AopExecution signature.getDeclaringType() {}", signature.getDeclaringType());	    
 	}
 /*
 	@Before(value = "pointcut()") 
