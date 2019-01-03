@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.example</groupId>
+  <version>0.0.1-SNAPSHOT</version>
+  <artifactId>eureka</artifactId>
+  <packaging>pom</packaging>
+
+
+  <name>eureka-demo</name>
+  <description>Demo Eureka for the example project</description>
+
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.1.1.RELEASE</version>
+  </parent>
+
+  <modules>
+    <module>eurekaClient</module>
+    <module>eurekaServer</module>
+  </modules>
+</project>
