@@ -34,6 +34,7 @@ public class UserRegisterQueueConfiguration {
      * 将用户注册队列绑定到路由交换配置上并设置指定路由键进行转发
      * @return
      */
+    //bind(user.register.queue).to(user.register.topic.exchange).with(user.register)
     @Bean
     public Binding userRegisterBinding()
     {

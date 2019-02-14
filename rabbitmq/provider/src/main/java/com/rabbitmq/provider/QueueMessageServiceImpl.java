@@ -3,6 +3,8 @@ package com.rabbitmq.provider;
 import com.rabbitmq.common.ExchangeEnum;
 import com.rabbitmq.common.QueueEnum;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,8 @@ public class QueueMessageServiceImpl implements QueueMessageService
      */
     @Autowired
     private RabbitTemplate rabbitTemplate;
+
+    static Logger logger = LoggerFactory.getLogger(QueueMessageServiceImpl.class);
 
     @Override
     public void send(Object message, ExchangeEnum exchangeEnum, QueueEnum queueEnum) throws Exception {
@@ -37,14 +41,14 @@ public class QueueMessageServiceImpl implements QueueMessageService
      */
     @Override
     public void confirm(CorrelationData correlationData, boolean ack, String cause) {
-        System.out.println(" 回调id:" + correlationData.getId());
+        logger.info(" 回调id:" + correlationData.getId());
         if (ack)
         {
-            System.out.println("消息发送成功");
+            logger.info("消息发送成功");
         }
         else
         {
-            System.out.println("消息发送失败:" + cause);
+            logger.info("消息发送失败:" + cause);
         }
     }
 }
