@@ -1,55 +1,46 @@
 package com.rabbitmq.provider;
 
-import org.junit.Before;
+import com.rabbitmq.common.exchange.RabbitmqExchange;
+import com.rabbitmq.common.queue.RabbitmqQueueKey;
+import com.rabbitmq.provider.service.QueueMessageService;
+import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.rule.OutputCapture;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ProviderApplicationTests {
-
-    /**
-     * 模拟mvc测试对象
-     */
-    private MockMvc mockMvc;
-
-    /**
-     * web项目上下文
-     */
+public class ProviderApplicationTests
+{
     @Autowired
-    private WebApplicationContext webApplicationContext;
+    private QueueMessageService queueMessageService;
 
-    /**
-     * 所有测试方法执行之前执行该方法
-     */
-    @Before
-    public void before() {
-        //获取mockmvc对象实例
-        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+    @Rule
+    public OutputCapture capture = new OutputCapture();
+
+    @Test
+    public void testTopic()
+    {
+ //       queueMessageService.send(RabbitmqExchange.TOPIC_EXCHANGE, RabbitmqQueueKey.TOPIC_ROUTING_KEY_QUEUE, 10L);
+ //       Assert.assertFalse( capture.toString().contains("Send Message failed:"));
     }
 
-    /**
-     * 测试添加用户
-     * @throws Exception
-     */
     @Test
-    public void testUserAdd() throws Exception
+    public void testDirect()
     {
-//        mockMvc.perform(MockMvcRequestBuilders.post("/user/save")
-//                .param("userName","Gilbert")
-//                .param("name","Wang")
-//                .param("age","1")
-//        )
-//                .andDo(MockMvcResultHandlers.log())
-//                .andReturn();
+//       queueMessageService.send(RabbitmqExchange.DIRECT_EXCHANGE, RabbitmqQueueKey.DIRECT_ROUTING_KEY_QUEUE, 10L);
+//       Assert.assertFalse( capture.toString().contains("Send Message failed:"));
+    }
+
+    @Test
+    public void testFanout()
+    {
+//       queueMessageService.send(RabbitmqExchange.FANOUT_EXCHANGE, RabbitmqQueueKey.FANOUT_ROUTING_KEY_QUEUE, 10L);
+//       Assert.assertFalse( capture.toString().contains("Send Message failed:"));
     }
 }
 
