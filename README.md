@@ -27,7 +27,10 @@
 	rabbitmq_management:http://127.0.0.1:15672
 
 	1.DirectExchange
-		http://localhost:8083/user/save?userName=w&name=g&age=1
+
+		http://localhost:8083/direct/queue?userName=w&name=g&age=1
+		http://localhost:8083/direct/some?userName=w&name=g&age=1
+
 		8081:common 
 		8082:consumer
 		8083:provider
@@ -37,4 +40,11 @@
 
 	2.FanoutExchange
 
+		http://localhost:8083/fanout/queue?userName=w&name=g&age=1
+		http://localhost:8083/fanout/some?userName=w&name=g&age=1
+
 	3.TopicExchange
+
+		http://localhost:8083/topic/queue?userName=w&name=g&age=1
+		http://localhost:8083/topic/some?userName=w&name=g&age=1
+		http://localhost:8083/topic/one?userName=w&name=g&age=1
