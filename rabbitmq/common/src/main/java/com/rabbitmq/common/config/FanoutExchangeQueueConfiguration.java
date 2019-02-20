@@ -10,24 +10,24 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class FanoutExchangeQueueConfiguration
+public class FanoutExchangeQueueConfiguration extends ExchangeQueueConfiguration
 {
     @Bean
     public Queue fanoutQueueQueue()
     {
-        return new Queue(RabbitmqQueueKey.FANOUT_BINDING_KEY_QUEUE,true);
+        return new Queue(RabbitmqQueueKey.FANOUT_BINDING_KEY_QUEUE, durableQueue, exclusiveQueue, autoDeleteQueue);
     }
 
     @Bean
     public Queue fanoutQueueSome()
     {
-        return new Queue(RabbitmqQueueKey.FANOUT_BINDING_KEY_SOME,true);
+        return new Queue(RabbitmqQueueKey.FANOUT_BINDING_KEY_SOME, durableQueue, exclusiveQueue, autoDeleteQueue);
     }
 
     @Bean
     public FanoutExchange fanoutExchange()
     {
-        return new FanoutExchange (RabbitmqExchange.FANOUT_EXCHANGE);
+        return new FanoutExchange (RabbitmqExchange.FANOUT_EXCHANGE, durableQueue, autoDeleteQueue);
     }
 
     //bind(queue.bindingKey).to(exchange).with(queue.routingKey)

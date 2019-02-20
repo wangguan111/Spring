@@ -3,7 +3,7 @@ package com.rabbitmq.provider.service;
 import org.springframework.amqp.AmqpException;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 
-public interface QueueMessageService extends RabbitTemplate.ConfirmCallback
+public interface QueueMessageService extends RabbitTemplate.ConfirmCallback, RabbitTemplate.ReturnCallback
 {
     void send(String exchange, String routingKey, Object message) throws AmqpException;
 }

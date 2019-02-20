@@ -1,7 +1,6 @@
 package com.rabbitmq.provider.control;
 
 import com.rabbitmq.common.exchange.RabbitmqExchange;
-import com.rabbitmq.common.queue.RabbitmqQueueKey;
 import com.rabbitmq.provider.entity.UserEntity;
 import com.rabbitmq.provider.service.MessageService;
 import org.springframework.amqp.AmqpException;

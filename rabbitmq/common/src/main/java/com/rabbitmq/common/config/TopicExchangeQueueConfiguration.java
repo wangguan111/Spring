@@ -11,30 +11,30 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class TopicExchangeQueueConfiguration
+public class TopicExchangeQueueConfiguration extends ExchangeQueueConfiguration
 {
     @Bean
     public Queue topicQueueQueue()
     {
-        return new Queue(RabbitmqQueueKey.TOPIC_BINDING_KEY_QUEUE,true);
+        return new Queue(RabbitmqQueueKey.TOPIC_BINDING_KEY_QUEUE, durableQueue, exclusiveQueue, autoDeleteQueue);
     }
 
     @Bean
     public Queue topicQueueB()
     {
-        return new Queue(RabbitmqQueueKey.TOPIC_BINDING_KEY_ONE,true);
+        return new Queue(RabbitmqQueueKey.TOPIC_BINDING_KEY_ONE, durableQueue, exclusiveQueue, autoDeleteQueue);
     }
 
     @Bean
     public Queue topicQueueA()
     {
-        return new Queue(RabbitmqQueueKey.TOPIC_BINDING_KEY_SOME,true);
+        return new Queue(RabbitmqQueueKey.TOPIC_BINDING_KEY_SOME, durableQueue, exclusiveQueue, autoDeleteQueue);
     }
 
     @Bean
     public TopicExchange topicExchange()
     {
-        return new TopicExchange(RabbitmqExchange.TOPIC_EXCHANGE);
+        return new TopicExchange(RabbitmqExchange.TOPIC_EXCHANGE, durableQueue, autoDeleteQueue);
     }
 
     //bind(queue.bindingKey).to(exchange).with(queue.routingKey)

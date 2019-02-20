@@ -10,24 +10,24 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class DirectExchangeQueueConfiguration
+public class DirectExchangeQueueConfiguration extends ExchangeQueueConfiguration
 {
     @Bean
     public Queue directQueueQueue()
     {
-        return new Queue(RabbitmqQueueKey.DIRECT_BINDING_KEY_QUEUE, true);
+        return new Queue(RabbitmqQueueKey.DIRECT_BINDING_KEY_QUEUE, durableQueue, exclusiveQueue, autoDeleteQueue);
     }
 
     @Bean
     public Queue directQueueSome()
     {
-        return new Queue(RabbitmqQueueKey.DIRECT_BINDING_KEY_SOME, true);
+        return new Queue(RabbitmqQueueKey.DIRECT_BINDING_KEY_SOME, durableQueue, exclusiveQueue, autoDeleteQueue);
     }
 
     @Bean
     public DirectExchange directExchange()
     {
-        return new DirectExchange(RabbitmqExchange.DIRECT_EXCHANGE);
+        return new DirectExchange(RabbitmqExchange.DIRECT_EXCHANGE, durableQueue, autoDeleteQueue);
     }
 
     //bind(queue.bindingKey).to(direct.exchange).with(queue.routingKey)

@@ -1,6 +1,5 @@
 package com.rabbitmq.provider.service;
 
-import com.rabbitmq.common.exchange.RabbitmqExchange;
 import com.rabbitmq.provider.entity.UserEntity;
 import org.springframework.amqp.AmqpException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +25,7 @@ public class MessageService
             userEntity.setId(id);
             id++;
         }
-        queueMessageService.send(RabbitmqExchange.TOPIC_EXCHANGE, routingKey, userEntity.getId());
+        queueMessageService.send(exchange, routingKey, userEntity.getId());
 
         return userEntity.getId();
     }
