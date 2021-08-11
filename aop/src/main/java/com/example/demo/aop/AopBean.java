@@ -1,11 +1,6 @@
-package com.example.demo;
+package com.example.demo.aop;
 
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.AfterThrowing;
-import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -16,14 +11,13 @@ import org.springframework.stereotype.Component;
 @SuppressWarnings("unused")
 @Aspect
 @Component
-public class AopTarget 
+public class AopBean extends AopBase
 {
-	final static Logger log = LoggerFactory.getLogger(AopThis.class);
+	final static Logger log = LoggerFactory.getLogger(AopBean.class);
 	
 	//Pointcut
-	//连接所有anObject.instanceof(AType)
-	//this(AType)同接受者方面描述，target(AType)则从调用者方面描述
-	@Pointcut("target(com.example.demo.IHelloWorldServiceImpl)")
+	//匹配所有以ServiceImpl结尾的bean里面的方法
+	@Pointcut("bean(*ServiceImpl)")
 	public void pointcut() 
 	{ }
 	
@@ -37,54 +31,54 @@ public class AopTarget
 	@Before(value = "pointcut()") 
 	public void doBefore1(JoinPoint joinPoint)throws Exception
 	{
-		log.info("2.AopTarget Before1 {}", joinPoint); 
+		log(joinPoint);
 	}
 /*
 	@Before(value = "pointcut()") 
 	public void doBefore2()throws Exception
 	{
-		log.info("3.AopTarget Before2"); 
+		log.info("3.AopBean Before2"); 
 	}
 
 	//After
 	@After(value = "pointcut()") 
 	public void doAfter1(JoinPoint joinPoint)throws Exception
 	{ 
-		log.info("6.AopTarget After1 {}", joinPoint);
+		log.info("6.AopBean After1 {}", joinPoint);
 	}
 
 	@After(value = "pointcut()") 
 	public void doAfter2()throws Exception
 	{ 
-		log.info("7.AopTarget After2");
+		log.info("7.AopBean After2");
 	}
 
 	//AfterReturning
     @AfterReturning(returning = "ret", value = "pointcut()")
     public void doAfterReturning1(JoinPoint joinPoint, Object ret) throws Exception 
     {
-    	log.info("8.AopTarget AfterReturning1 {}", ret);
+    	log.info("8.AopBean AfterReturning1 {}", ret);
     }
    
     @AfterReturning(returning = "ret", value = "pointcut()")
     public void doAfterReturning2(Object ret) throws Exception 
     {
-    	log.info("9.AopTarget AfterReturning2 {}", ret);
+    	log.info("9.AopBean AfterReturning2 {}", ret);
     }
  
     @AfterReturning(value = "pointcut()")
     public void doAfterReturning3() throws Exception 
     {
-    	log.info("10.AopTarget AfterReturning3 {}");
+    	log.info("10.AopBean AfterReturning3 {}");
     }
 
     //Around
     @Around(value = "pointcut()")  
     public Object doArround1(ProceedingJoinPoint pjp) throws Throwable 
     { 
-    	log.info("1.AopTarget Arround1 before proceed" );
+    	log.info("1.AopBean Arround1 before proceed" );
     	Object o =  pjp.proceed();
-    	log.info("5.AopTarget Arround1 after proceed");
+    	log.info("5.AopBean Arround1 after proceed");
     	return o;
     }
  
@@ -92,19 +86,19 @@ public class AopTarget
     @AfterThrowing(value = "pointcut()", throwing = "ex")
     public void doAfterThrow1(JoinPoint joinPoint,  Exception ex)
     {  
-    	log.info("AopTarget AfterThrow1 {}", joinPoint);
+    	log.info("AopBean AfterThrow1 {}", joinPoint);
     }
  
     @AfterThrowing(value = "pointcut()")
     public void doAfterThrow2(JoinPoint joinPoint)
     {  
-    	log.info("AopTarget AfterThrow2 {}", joinPoint);
+    	log.info("AopBean AfterThrow2 {}", joinPoint);
     }
     
     @AfterThrowing(value = "pointcut()")
     public void doAfterThrow3()
     {  
-    	log.info("AopTarget AfterThrow3");
+    	log.info("AopBean AfterThrow3");
     }
 */
 }

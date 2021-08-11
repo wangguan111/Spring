@@ -1,12 +1,6 @@
-package com.example.demo;
+package com.example.demo.aop;
 
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.Signature;
-import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.AfterThrowing;
-import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -14,15 +8,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-@SuppressWarnings("unused")
+/**
+ * @author gilbertwang
+ */
 @Aspect
 @Component
-public class AopAnnotationt2 
+public class AopAnnotationt2 extends AopBase
 {
 	final static Logger log = LoggerFactory.getLogger(AopAnnotationt2.class);
 	
 	//Pointcut
-	@Pointcut(value = "@annotation(AopInterface)") 
+	@Pointcut(value = "@annotation(AopInterfaceMethod)")
 	public void pointcut() 
 	{ }
 	
@@ -30,37 +26,7 @@ public class AopAnnotationt2
 	@Before(value = "pointcut()") 
 	public void doBefore1(JoinPoint joinPoint)throws Exception
 	{
-		log.info("2.AopAnnotationt2 Before1 {}", joinPoint);
-		
-		//获取目标方法的参数信息 
-		//java
-	    Object[] obj = joinPoint.getArgs();
-		log.info("2.AopAnnotationt2 joinPoint.getArgs() {}", joinPoint.getArgs());
-
-	    //AOP代理类的信息
-		//com.example.demo.IHelloWorldServiceImpl@73032858
-		log.info("2.AopAnnotationt2 joinPoint.getThis() {}", joinPoint.getThis());
-
-	    //代理的目标对象
-		//com.example.demo.IHelloWorldServiceImpl@73032858
-		log.info("2.AopAnnotationt2 joinPoint.getTarget() {}", joinPoint.getTarget());
-
-	    //用的最多 通知的签名
-		//String com.example.demo.IHelloWorldServiceImpl.getHiMessage(String)
-	    Signature signature = joinPoint.getSignature();
-		log.info("2.AopAnnotationt2 joinPoint.getSignature() {}", joinPoint.getSignature());
-		
-	    //代理的是哪一个方法
-		//getHiMessage
-		log.info("2.AopAnnotationt2 signature.getSignature() {}", signature.getName());
-
-	    //AOP代理类的名字
-		//com.example.demo.IHelloWorldServiceImpl
-		log.info("2.AopAnnotationt2 signature.getDeclaringTypeName() {}", signature.getDeclaringTypeName());
-
-	    //AOP代理类的类（class）信息
-		//class com.example.demo.IHelloWorldServiceImpl
-		log.info("2.AopAnnotationt2 signature.getDeclaringType() {}", signature.getDeclaringType());	
+		log(joinPoint);
 	}
 /*
 	@Before(value = "pointcut()") 

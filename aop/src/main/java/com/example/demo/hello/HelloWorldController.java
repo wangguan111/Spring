@@ -1,10 +1,13 @@
-package com.example.demo;
+package com.example.demo.hello;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * @author gilbertwang
+ */
 @RestController
 public class HelloWorldController 
 {

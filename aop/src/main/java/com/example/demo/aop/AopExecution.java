@@ -1,12 +1,7 @@
-package com.example.demo;
+package com.example.demo.aop;
 
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
-import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.AfterThrowing;
-import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -17,13 +12,17 @@ import org.springframework.stereotype.Component;
 @SuppressWarnings("unused")
 @Aspect
 @Component
-public class AopExecution 
+public class AopExecution extends AopBase
 {
 	final static Logger log = LoggerFactory.getLogger(AopExecution.class);
-	
+
+//	*：匹配任何数量字符
+//	…：匹配任何数量字符的重复，如在类型模式中匹配任何数量子包；而在方法参数模式中匹配任何数量参数（0个或者多个参数）
+//	+：匹配指定类型及其子类型；仅能作为后缀放在类型模式后边
+
 	//Pointcut
-	//@Pointcut("execution(* com.example.demo.IHelloWorldServiceImpl.getHiMessage(..))")
-	@Pointcut("execution(* com.example.demo.IHelloWorldServiceImpl.*(..))")
+	//@Pointcut("execution(* com.example.demo.hello.IHelloWorldServiceImpl.getHiMessage(..))")
+	@Pointcut("execution(* com.example.demo.hello.IHelloWorldServiceImpl.*(..))")
 	//第一个通配符匹配所有返回值类型，
 	//第二个匹配这个类里的所有方法,()括号表示参数列表,括号里的用两个点号表示匹配任意个参数，包括0个
 	public void pointcut() 
@@ -39,37 +38,7 @@ public class AopExecution
 	@Before(value = "pointcut()") 
 	public void doBefore1(JoinPoint joinPoint)throws Exception
 	{
-		log.info("2.AopExecution Before1 {}", joinPoint); 
-
-		//获取目标方法的参数信息 
-		//java
-	    Object[] obj = joinPoint.getArgs();
-		log.info("2.AopExecution joinPoint.getArgs() {}", joinPoint.getArgs());
-
-	    //AOP代理类的信息
-		//com.example.demo.IHelloWorldServiceImpl@73032858
-		log.info("2.AopExecution joinPoint.getThis() {}", joinPoint.getThis());
-
-	    //代理的目标对象
-		//com.example.demo.IHelloWorldServiceImpl@73032858
-		log.info("2.AopExecution joinPoint.getTarget() {}", joinPoint.getTarget());
-
-	    //用的最多 通知的签名
-		//String com.example.demo.IHelloWorldServiceImpl.getHiMessage(String)
-	    Signature signature = joinPoint.getSignature();
-		log.info("2.AopExecution joinPoint.getSignature() {}", joinPoint.getSignature());
-		
-	    //代理的是哪一个方法
-		//getHiMessage
-		log.info("2.AopExecution signature.getSignature() {}", signature.getName());
-
-	    //AOP代理类的名字
-		//com.example.demo.IHelloWorldServiceImpl
-		log.info("2.AopExecution signature.getDeclaringTypeName() {}", signature.getDeclaringTypeName());
-
-	    //AOP代理类的类（class）信息
-		//class com.example.demo.IHelloWorldServiceImpl
-		log.info("2.AopExecution signature.getDeclaringType() {}", signature.getDeclaringType());	    
+		log(joinPoint);
 	}
 /*
 	@Before(value = "pointcut()") 

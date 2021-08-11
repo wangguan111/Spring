@@ -1,11 +1,6 @@
-package com.example.demo;
+package com.example.demo.aop;
 
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.AfterThrowing;
-import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -13,16 +8,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-@SuppressWarnings("unused")
 @Aspect
 @Component
-public class AopAnnotationt 
+public class AopAnnotationt extends AopBase
 {
 	final static Logger log = LoggerFactory.getLogger(AopAnnotationt.class);
-	
-	//Pointcut
+
 	@Pointcut(value = "@annotation(analysisActuator)") 
-	public void pointcut(AopInterface analysisActuator) 
+	public void pointcut(AopInterfaceMethod analysisActuator)
 	{ }
 	
 	//除了@Around外，每个方法里都可以加或者不加参数JoinPoint,
@@ -30,12 +23,11 @@ public class AopAnnotationt
 	//@Around参数必须为ProceedingJoinPoint，pjp.proceed相应于执行被切面的方法。
 	//@AfterReturning方法里，可以加returning = “XXX”，XXX即为在controller里方法的返回值.
 	//@AfterThrowing方法里，可以加throwing = "XXX"，供读取异常信息.
-	
-	//Before
+
 	@Before(value = "pointcut(analysisActuator)") 
-	public void doBefore1(JoinPoint joinPoint, AopInterface analysisActuator)throws Exception
+	public void doBefore1(JoinPoint joinPoint, AopInterfaceMethod analysisActuator)throws Exception
 	{
-		log.info("2.AopAnnotationt Before1 {}", analysisActuator.note()); 
+		log(joinPoint);
 	}
 /*
 	@Before(value = "pointcut(analysisActuator)") 

@@ -6,6 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 //http://localhost:8081/hello?name=java
 //http://localhost:8081/hi?name=java
 
+/**
+ * @author gilbertwang
+ */
 @SpringBootApplication
 public class AopDemoApplication 
 {
@@ -30,4 +33,4 @@ public class AopDemoApplication
 //4.匹配注解(@annotation, @within, @target, @args)
 //AopAnnotationt
 //AopAnnotationt2
-//AopWithinMark -- no ok
+//AopWithinMark

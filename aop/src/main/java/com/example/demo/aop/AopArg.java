@@ -1,11 +1,5 @@
-package com.example.demo;
+package com.example.demo.aop;
 
-import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.AfterThrowing;
-import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -16,13 +10,14 @@ import org.springframework.stereotype.Component;
 @Aspect
 @SuppressWarnings("unused")
 @Component
-public class AopArg 
+public class AopArg extends AopBase
 {
 	final static Logger log = LoggerFactory.getLogger(AopArg.class);
 	
 	//Pointcut
 	//匹配所有getHiMessage的String参数方法
-	@Pointcut(value = "execution(public * com.example.demo.IHelloWorldServiceImpl.getHiMessage(*)) && args(name)", argNames = "name")
+	//args会在调用的过程中对参数实际的类型进行匹配，比较耗时，慎用。
+	@Pointcut(value = "execution(public * com.example.demo.hello.IHelloWorldServiceImpl.getHiMessage(*)) && args(name)", argNames = "name")
 	public void pointcut(String name) 
 	{ }
 	
